@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include <string.h>
 
 int main() { 
-   float bmi, weight, height;
+
+ float bmi, weight, height;
  
  printf("Enter your weight in kg:\n");
  scanf("%f", &weight);
@@ -29,6 +29,5 @@ else if (bmi >= 25 && bmi <= 29.9) {
 else if (bmi>= 30) {
     printf("Overview: Obesity");
 }
-
 
 }
