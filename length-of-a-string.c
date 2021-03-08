@@ -5,6 +5,7 @@ int main() {
     char a[100];
     printf("Enter a string\n");
  scanf("%s", &a);
+///gets(a);
    printf("Entered string: %s\n", a);
     int length;
     length = strlen(a);
