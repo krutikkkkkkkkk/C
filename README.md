@@ -26,6 +26,8 @@ Basic C projects
 
 - [x] Odd or Even
 
+- [x] BMI
+
 
 ### Reboot13
 
