@@ -1,6 +1,28 @@
 #include <stdio.h>
 
 int main() {
+    int number,i;
+
+ printf("Enter Any Number\n");
+ scanf("%d", &number);
+ printf("Entered number %d\n", number);
+for(i = 1; i<=10; i++) {
+
+    int table= number * i;
+    printf("%d x %d = %d\n",number,i,table);
+}  
+    return 0;
+}
+
+
+
+//// For Kids LOL
+
+
+
+/* #include <stdio.h>
+
+int main() {
     int number;
     int num1,num2,num3,num4,num5,num6,num7,num8,num9,num10;
  printf("Enter Any Number to Get the Table of\n");
@@ -35,3 +57,4 @@ int main() {
 
     return 0;
 }
+*/
