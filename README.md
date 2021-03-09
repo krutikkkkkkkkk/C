@@ -28,6 +28,11 @@ Basic C projects
 
 - [x] BMI
 
+- [x] Leap Year
+
+- [x] Multiplication Table
+
+
 
 ### Reboot13
 
