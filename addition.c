@@ -1,13 +1,14 @@
 #include <stdio.h>
-/// Addition of 2 numbers
-int main() {
-  int a,b,c;
-    printf("Enter 1st Number\n");
-    scanf("%d", &a);
+int main() {    
 
-    printf("Enter 2nd Number\n");
-    scanf("%d", &b);
-c = a + b;
-    printf("Addition of 2 numbers: %d", c);
+    int number1, number2, sum;
+    
+    printf("Enter two integers: ");
+    scanf("%d %d", &number1, &number2);
+
+    // calculating sum
+    sum = number1 + number2;      
+    
+    printf("%d + %d = %d", number1, number2, sum);
     return 0;
 }
