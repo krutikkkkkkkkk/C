@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+        }
+
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        #login,
+        #home,
+        #logout {
+            display: none;
+        }
+    </style>
+    <title>Idle Timer Demo</title>
+</head>
+
+<body>
+    <div id="login">
+        <h1>Login Page</h1>
+        <button onclick="login()">Login</button>
+    </div>
+
+    <div id="home">
+        <h1>Welcome to the Home Page</h1>
+        <p id="message"></p>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <div id="logout">
+        <h1>Logout Page</h1>
+        <button onclick="login()">Back to Login</button>
+    </div>
+
+    <div id="popup">
+        <h1>Are you with us?</h1>
+        <p>Click anywhere to continue interaction</p>
+        <p id="countdown">Automatic Logout Kicks in 10 seconds</p>
+    </div>
+
+    <div id="overlay"></div>
+
+    <script>
+        let isLoggedIn = false;
+        let isActive = true;
+        let showPopup = false;
+        let countdown = 10;
+        let timeout = 5
+        let timeoutId;
+        let popupInterval;
+
+        document.getElementById('message').innerText = `Idle timeout set for ${timeout} seconds`;
+
+        function login() {
+            isLoggedIn = true;
+            showElement('home');
+            hideElement('login');
+            hideElement('logout');
+            resetTimer();
+        }
+
+        function logout() {
+            isLoggedIn = false;
+            hideElement('home');
+            hideElement('logout');
+            showElement('login');
+            stopTimer();
+        }
+
+        function showPopupAndStartTimer() {
+            if (isActive) {
+                resetTimer();
+            } else {
+                showPopup = true;
+                updatePopupCountdown();
+                showElement('popup');
+                startPopupTimer();
+            }
+        }
+
+        function hidePopup() {
+            showPopup = false;
+            hideElement('popup');
+        }
+
+        function updatePopupCountdown() {
+            document.getElementById('countdown').innerText = `Automatic Logout in ${countdown} seconds`;
+        }
+
+        function startPopupTimer() {
+            popupInterval = setInterval(() => {
+                if (countdown > 0) {
+                    countdown--;
+                    updatePopupCountdown();
+                } else {
+                    clearInterval(popupInterval);
+                    hidePopup();
+                    logout();
+                }
+            }, 1000);
+
+        }
+
+        function resetTimer() {
+            isActive = true;
+            countdown = 10;
+            hidePopup();
+            stopTimer();
+            startTimer();
+        }
+
+        function startTimer() {
+            timeoutId = setTimeout(() => {
+                isActive = false;
+                showPopupAndStartTimer();
+            }, timeout * 1000); // 5 seconds
+        }
+
+        function stopTimer() {
+            clearTimeout(timeoutId);
+        }
+
+        function showElement(id) {
+            document.getElementById(id).style.display = 'block';
+        }
+
+        function hideElement(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        // Event listeners for user activity
+        document.addEventListener('mousemove', handleActivity);
+        document.addEventListener('keydown', handleActivity);
+
+        function handleActivity() {
+            if (!isLoggedIn) return;
+            clearInterval(popupInterval)
+            countdown = 10
+            setIsActive(true);
+            showPopupAndStartTimer();
+
+        }
+
+        function setIsActive(value) {
+            isActive = value;
+        }
+        showElement('login')
+    </script>
+</body>
+
+</html>
